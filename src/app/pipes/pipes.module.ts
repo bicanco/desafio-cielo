@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { PaginatePipe } from './paginate.pipe';
+import { GetPagesPipe } from './get-pages.pipe';
 
 const pipes = [
-  PaginatePipe,
+  GetPagesPipe,
 ];
 
 @NgModule({

@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { PaginatePipe } from '@pipes/paginate.pipe';
+import { GetPagesPipe } from '@pipes/get-pages.pipe';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
   providers: [
-    PaginatePipe,
+    GetPagesPipe,
   ],
 })
 export class TableComponent {

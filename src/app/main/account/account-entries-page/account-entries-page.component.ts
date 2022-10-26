@@ -13,7 +13,6 @@ import { doOnSubscribe } from '@utils';
 @Component({
   selector: 'app-account-entries-page',
   templateUrl: './account-entries-page.component.html',
-  styleUrls: ['./account-entries-page.component.scss'],
   providers:[
     CurrencyPipe,
     DatePipe,

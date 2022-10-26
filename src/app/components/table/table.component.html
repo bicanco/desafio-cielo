@@ -24,7 +24,7 @@
     </li>
 
     <li
-      *ngFor="let page of totalPages | paginate"
+      *ngFor="let page of totalPages | getPages"
       class="page-item page-link"
       [class.active]="page === currentPage"
       (click)="changePage(page)"

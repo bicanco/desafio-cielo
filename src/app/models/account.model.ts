@@ -23,7 +23,6 @@ export interface AccountEntry {
 
 export enum EntryStatus {
   approved = 'Aprovada',
-  rejected = 'Rejeitada',
 }
 
 export enum EntryChannel {
@@ -38,6 +37,4 @@ export enum CardBrand {
 
 export enum PaymentType {
  credit = 'Crédito à vista',
- creditWithInstalments = 'Crédito parcelado',
- debit = 'Débito'
 }

@@ -9,5 +9,5 @@ export class LoadingComponent {
   @Input() isLoading = false;
   @Input() hasError = false;
 
-  @Output() tryAggain = new EventEmitter<true>();
+  @Output() tryAgain = new EventEmitter<true>();
 }

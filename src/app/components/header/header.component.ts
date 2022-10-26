@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    // Setting breadcrumb items based on the data set in the routing configuration
     this.router.events.pipe(
       untilDestroyed(this),
       tap(event => {
@@ -32,6 +33,7 @@ export class HeaderComponent implements OnInit {
       }),
       filter(event => event instanceof NavigationEnd),
       switchMap(() => {
+        // Getting the data from the currently active path
         let currentRoute = this.activatedRoute;
         const dataObservables = [merge(currentRoute.data, currentRoute.url)];
 
@@ -42,15 +44,19 @@ export class HeaderComponent implements OnInit {
         return concat(dataObservables);
       }),
       switchMap(dataObservable => dataObservable),
+      // Grouping route data with respective url
       bufferCount(2),
       map(data => ({
         ...data[0],
         route: data[1],
-      }) as {[key: string]: any}),
+      }) as Record<string, any>),
+      // Avoiding duplicate breacdrumb items
       filter(data => data.pageTitle),
       tap(data => {
+        // Setting basic header information after obtaining the information from the route
         this.title = data.pageTitle;
         this.icon = data.icon;
+
         if (this.breacrumb.slice(-1)[0]?.breadcrumb !== this.title) {
           this.breacrumb.push({
             breadcrumb: data.pageTitle,

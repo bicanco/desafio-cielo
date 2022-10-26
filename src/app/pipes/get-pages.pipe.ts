@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'paginate'
+  name: 'getPages'
 })
-export class PaginatePipe implements PipeTransform {
+export class GetPagesPipe implements PipeTransform {
 
   transform(totalPages: number): number[] {
     const pages = [];
