@@ -10,7 +10,7 @@ export interface AccountEntry {
   truncatedCardNumber: string;
   grossAmount: number;
   netAmount: number;
-  terminal: number;
+  terminal: string;
   administrationFee: number;
   channelCode: number;
   channel: EntryChannel;

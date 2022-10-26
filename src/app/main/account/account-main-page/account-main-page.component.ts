@@ -1,11 +1,14 @@
-import { finalize, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, finalize, tap } from 'rxjs/operators';
 
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AccountEntry } from '@models';
+import { AccountEntry, PaginatedResponse } from '@models';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AccountService } from '@services';
 import { doOnSubscribe } from '@utils';
 
+@UntilDestroy()
 @Component({
   selector: 'app-account-main-page',
   templateUrl: './account-main-page.component.html',
@@ -23,6 +26,9 @@ export class AccountMainPageComponent implements OnInit {
   };
 
   isLoading = false;
+  hasError = false;
+  requestResponse?: PaginatedResponse<AccountEntry>;
+  requestObservable?: Observable<PaginatedResponse<AccountEntry>>;
 
   constructor(
     private accountService: AccountService,
@@ -30,16 +36,27 @@ export class AccountMainPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.accountService.getEntries().pipe(
-      doOnSubscribe(() => this.isLoading = true),
+    this.requestObservable = this.accountService.getEntries().pipe(
+      untilDestroyed(this),
+      doOnSubscribe(() => {
+        this.isLoading = true;
+        this.hasError = false;
+      }),
       tap(entries => {
+        this.isLoading = false;
         this.mapResponse(entries.items);
-        this.layout.title = `Resumo de lançamentos ${
+        this.layout.title = `Resumo dos lançamentos de ${
           this.datePipe.transform(entries.summary.initialDate, 'dd/MM/yyyy')
         }`
       }),
+      catchError(error => {
+        this.hasError = true;
+        return throwError(error);
+      }),
       finalize(() => this.isLoading = false),
-    ).subscribe();
+    );
+
+    this.requestObservable.subscribe();
   }
 
   private mapResponse(items: AccountEntry[]): void {
@@ -99,14 +116,18 @@ export class AccountMainPageComponent implements OnInit {
     }
 
 
-    this.data = [{
+    setTimeout(() => this.data = [{
       type: 'sunburst',
       ids,
       labels,
       parents,
       values,
       branchvalues: 'total',
-    }];
+    }]);
+  }
+
+  tryAgain(): void {
+    this.requestObservable?.subscribe();
   }
 
   private getAllValuesOfKey(items: AccountEntry[], key: keyof AccountEntry): string[] {

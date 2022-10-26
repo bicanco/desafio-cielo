@@ -1,0 +1,33 @@
+<app-loading [isLoading]="isLoading" [hasError]="hasError" (tryAggain)="tryAgain()">
+  <h2 class="mb-3">Lançamentos da conta</h2>
+  <div class="m-3">
+    <h5>Filtrar por</h5>
+    <form class="d-flex" [formGroup]="searchForm">
+      <div class="form-floating m-3">
+        <select class="form-select" id="fieldSelect" formControlName="field">
+          <option *ngFor="let option of selectOptions" [value]="option.value">{{option.text}}</option>
+        </select>
+        <label for="fieldSelect">Campo</label>
+      </div>
+
+      <div class="form-floating m-3">
+        <input type="text" class="form-control" id="query" formControlName="query">
+        <label for="query">Buscar</label>
+      </div>
+
+      <button type="button" class="btn btn-primary m-3" (click)="resetQuery()">Limpar Busca</button>
+    </form>
+  </div>
+
+  <ng-container *ngIf="filteredRows.length; else emptyMessage">
+    <app-table
+      [header]="header"
+      [rows]="filteredRows"
+    ></app-table>
+  </ng-container>
+
+  <ng-template #emptyMessage>
+    <i class="bi bi-x-octagon"></i>
+    Não há lançamentos para essa busca
+  </ng-template>
+</app-loading>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AccountDetailsPageComponent } from './account-details-page/account-details-page.component';
+import { AccountEntriesPageComponent } from './account-entries-page/account-entries-page.component';
 import { AccountMainPageComponent } from './account-main-page/account-main-page.component';
 
 const routes: Routes = [
@@ -17,10 +17,10 @@ const routes: Routes = [
         component: AccountMainPageComponent,
       },
       {
-        path: 'detalhes',
-        component: AccountDetailsPageComponent,
+        path: 'lancamentos',
+        component: AccountEntriesPageComponent,
         data: {
-          pageTitle: 'Detalhes da Conta',
+          pageTitle: 'Lançamentos da Conta',
           icon: 'bi bi-search text-success',
         },
       }

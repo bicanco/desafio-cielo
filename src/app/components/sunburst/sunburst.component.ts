@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, Input } from '@angular/core';
 
 declare var Plotly: any;
 
@@ -13,12 +14,21 @@ export class SunburstComponent {
 
   @Input() set data(value: Record<string, any>[]) {
     this._data = value;
-    Plotly.react('sunburst', this._data, this._layout);
+    this.plotChart();
   };
 
   @Input() set layout(value: Record<string, any>) {
     this._layout = value;
-    Plotly.react('sunburst', this._data, this._layout);
+    this.plotChart();
   }
 
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+  ) {}
+
+  private plotChart(): void {
+    if(this.document.getElementById('sunburst')) {
+      Plotly.react('sunburst', this._data, this._layout);
+    }
+  }
 }

@@ -24,6 +24,7 @@
       "@components/*": ["src/app/components/*"],
       "@data": ["src/app/data/lancamento-conta-legado.json"],
       "@models": ["src/app/models"],
+      "@pipes/*": ["src/app/pipes/*"],
       "@services": ["src/app/services"],
       "@utils": ["src/app/utils"]
     }

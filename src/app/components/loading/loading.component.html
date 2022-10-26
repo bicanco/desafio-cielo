@@ -1,0 +1,21 @@
+<ng-container *ngIf="isLoading; else content">
+  <div class="spinner-border text-primary d-flex mx-auto"></div>
+</ng-container>
+
+<ng-template #content>
+  <ng-container *ngIf="hasError; else noError">
+    <div class="d-flex mx-auto flex-column w-50">
+      <i class="bi bi-bug align-self-center"></i>
+      <p class="text-center">Ocorreu um erro, tente novamente!</p>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="tryAggain.emit(true)"
+      >Tentar novamente</button>
+    </div>
+  </ng-container>
+
+  <ng-template #noError>
+    <ng-content></ng-content>
+  </ng-template>
+</ng-template>

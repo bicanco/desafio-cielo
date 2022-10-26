@@ -1,5 +1,6 @@
+<h2 class="mb-4">Dashboard da Conta</h2>
 <div class="row">
-  <div class="col-12 col-md-2">
+  <div class="col-12 col-md-3">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">
@@ -8,20 +9,16 @@
         <p class="card-text">
           Ver lançamentos da conta
         </p>
-        <a class="btn btn-primary" [routerLink]="['./detalhes']">Ver Detalhes</a>
+        <a class="btn btn-primary" [routerLink]="['./lancamentos']">Ver Detalhes</a>
       </div>
     </div>
   </div>
-  <div class="col-12 col-md-10 d-flex">
-    <div class="mx-auto" *ngIf="!isLoading; else loadingSpinner">
-      <div>
-        <app-sunburst [data]="data" [layout]="layout"></app-sunburst>
+  <div class="col-12 col-md-9">
+    <app-loading [isLoading]="isLoading" [hasError]="hasError" (tryAggain)="tryAgain()">
+      <div class="d-flex">
+        <app-sunburst [data]="data" [layout]="layout" class="mx-auto overflow-auto"></app-sunburst>
       </div>
-    </div>
+    </app-loading>
   </div>
-
-  <ng-template #loadingSpinner>
-    <div class="spinner-border text-primary mx-auto"></div>
-  </ng-template>
 </div>
 
