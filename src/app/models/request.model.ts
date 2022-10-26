@@ -15,5 +15,5 @@ export interface PaginatedResponse<T> {
     lastPage: boolean;
     firstPage: boolean;
   };
-  item: T[];
+  items: T[];
 }

@@ -1,3 +1,3 @@
 export enum Endpoints {
-  AccountEntries = 'api/serviceData',
+  AccountEntries = 'accountEntries',
 }

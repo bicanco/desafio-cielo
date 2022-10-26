@@ -20,12 +20,12 @@
       "es2018",
       "dom"
     ],
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
     "paths": {
-      "@services": ["src/app/services"],
-      "@utils": ["src/app/utils"],
+      "@components/*": ["src/app/components/*"],
       "@data": ["src/app/data/lancamento-conta-legado.json"],
+      "@models": ["src/app/models"],
+      "@services": ["src/app/services"],
+      "@utils": ["src/app/utils"]
     }
   },
   "angularCompilerOptions": {

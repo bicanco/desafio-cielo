@@ -3,9 +3,10 @@ import { PaginatedResponse } from 'src/app/models';
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AccountEntry } from '@models';
 import { Endpoints } from '@utils';
 
-import { AccountEntry } from '../models/account.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AccountService {
 
   getEntries(): Observable<PaginatedResponse<AccountEntry>> {
     return this.httpClient.get<PaginatedResponse<AccountEntry>>(
-      Endpoints.AccountEntries
+      `${environment.APIurl}${Endpoints.AccountEntries}`
     );
   }
 }

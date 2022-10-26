@@ -1,0 +1,18 @@
+<nav>
+  <ol class="breadcrumb">
+    <li
+      *ngFor="let breadcrumItem of breadcrumb; last as last"
+      class="breadcrumb-item"
+    >
+      <a [routerLink]="[breadcrumItem.route]" *ngIf="!last; else activeRoute">
+        {{breadcrumItem.breadcrumb}}
+      </a>
+
+      <ng-template #activeRoute>
+        <span class="active">
+          {{breadcrumItem.breadcrumb}}
+        </span>
+      </ng-template>
+    </li>
+  </ol>
+</nav>
